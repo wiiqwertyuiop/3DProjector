@@ -43,12 +43,12 @@ Engine3d::Engine3d()
         {0, 0, 1, 0}};
 }
 
-std::vector<sf::Vertex> Engine3d::renderScreen(sf::Vector2u screenSize)
+std::vector<sf::ConvexShape> Engine3d::renderScreen(sf::Vector2u screenSize)
 {
-    std::vector<sf::Vertex> drawObjects;
+    std::vector<sf::ConvexShape> drawObjects;
 
     Matrix4x4 matRotZ, matRotX;
-    fTheta += 1.0f * 0.00003;
+    fTheta += 1.0f * 0.00007;
 
     //  Rotation Z
     matRotZ.m[0][0] = cosf(fTheta);
@@ -70,6 +70,14 @@ std::vector<sf::Vertex> Engine3d::renderScreen(sf::Vector2u screenSize)
     for (auto triangle : meshCube.triangles)
     {
         Triangle triProjected, triRotatedZ, triRotatedZX;
+
+        sf::ConvexShape drawObj;
+
+        drawObj.setPointCount(3);
+        drawObj.setFillColor(sf::Color::Transparent);
+        drawObj.setOutlineColor(sf::Color::White);
+        drawObj.setOutlineThickness(2.0f);
+
         // Project 3D -> 2D
         for (int i = 0; i < 3; i++)
         {
@@ -87,17 +95,10 @@ std::vector<sf::Vertex> Engine3d::renderScreen(sf::Vector2u screenSize)
 
             triProjected.p[i].x *= 0.5f * (float)screenSize.x;
             triProjected.p[i].y *= 0.5f * (float)screenSize.y;
+            // Draw object as lines
+            drawObj.setPoint(i, sf::Vector2f(triProjected.p[i].x, triProjected.p[i].y));
         }
-
-        // Draw object as lines
-        drawObjects.push_back(sf::Vertex(sf::Vector2f(triProjected.p[0].x, triProjected.p[0].y), sf::Color::White));
-        drawObjects.push_back(sf::Vertex(sf::Vector2f(triProjected.p[1].x, triProjected.p[1].y), sf::Color::Red));
-
-        drawObjects.push_back(sf::Vertex(sf::Vector2f(triProjected.p[1].x, triProjected.p[1].y), sf::Color::White));
-        drawObjects.push_back(sf::Vertex(sf::Vector2f(triProjected.p[2].x, triProjected.p[2].y), sf::Color::Red));
-
-        drawObjects.push_back(sf::Vertex(sf::Vector2f(triProjected.p[2].x, triProjected.p[2].y), sf::Color::White));
-        drawObjects.push_back(sf::Vertex(sf::Vector2f(triProjected.p[0].x, triProjected.p[0].y), sf::Color::Red));
+        drawObjects.push_back(drawObj);
     }
 
     return drawObjects;

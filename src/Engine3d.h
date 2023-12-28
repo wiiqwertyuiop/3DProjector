@@ -33,7 +33,7 @@ private:
 
 public:
     Engine3d();
-    std::vector<sf::Vertex> renderScreen(sf::Vector2u screenSize);
+    std::vector<sf::ConvexShape> renderScreen(sf::Vector2u screenSize);
 
     void multiplyMatrixVector(Vec3d &in, Vec3d &out, Matrix4x4 &matrix)
     {

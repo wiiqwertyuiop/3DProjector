@@ -3,7 +3,7 @@
 int main()
 {
     Engine3d engine3d;
-    sf::RenderWindow window(sf::VideoMode(1200, 1200), "3D Test");
+    sf::RenderWindow window(sf::VideoMode(sf::Vector2u(1200, 1200)), "3D Test");
 
     while (window.isOpen())
     {
@@ -16,9 +16,9 @@ int main()
             }
         }
         // Draw screen
-        std::vector<sf::Vertex> vertices = engine3d.renderScreen(window.getSize());
         window.clear();
-        window.draw(&vertices[0], vertices.size(), sf::PrimitiveType::Lines);
+        for (auto obj : engine3d.renderScreen(window.getSize()))
+            window.draw(obj);
         window.display();
     }
     return 0;

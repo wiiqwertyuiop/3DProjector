@@ -7,8 +7,8 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
 include(FetchContent)
 FetchContent_Declare(SFML
-    GIT_REPOSITORY https://github.com/SFML/SFML.git
-    GIT_TAG 2.6.x)
+    GIT_REPOSITORY https://github.com/kimci86/SFML.git
+    GIT_TAG feature/shape_miter_limit)
 FetchContent_MakeAvailable(SFML)
 
 add_executable(CMakeSFMLProject src/main.cpp src/Engine3d.cpp)
