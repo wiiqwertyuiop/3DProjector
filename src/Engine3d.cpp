@@ -51,20 +51,18 @@ std::vector<sf::Vertex> Engine3d::renderScreen(sf::Vector2u screenSize)
     fTheta += 1.0f * 0.00003;
 
     //  Rotation Z
-    matRotZ.m[0][0] = cosf(fTheta);
-    matRotZ.m[0][1] = sinf(fTheta);
-    matRotZ.m[1][0] = -sinf(fTheta);
-    matRotZ.m[1][1] = cosf(fTheta);
-    matRotZ.m[2][2] = 1;
-    matRotZ.m[3][3] = 1;
+    matRotZ.m = {
+        {cosf(fTheta), sinf(fTheta), 0, 0},
+        {-sinf(fTheta), cosf(fTheta), 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1}};
 
     // Rotation X
-    matRotX.m[0][0] = 1;
-    matRotX.m[1][1] = cosf(fTheta * 0.5f);
-    matRotX.m[1][2] = sinf(fTheta * 0.5f);
-    matRotX.m[2][1] = -sinf(fTheta * 0.5f);
-    matRotX.m[2][2] = cosf(fTheta * 0.5f);
-    matRotX.m[3][3] = 1;
+    matRotX.m = {
+        {1, 0, 0, 0},
+        {0, cosf(fTheta * 0.5f), sinf(fTheta * 0.5f), 0},
+        {0, -sinf(fTheta * 0.5f), cosf(fTheta * 0.5f), 0},
+        {0, 0, 0, 1}};
 
     // Draw triangle
     for (auto triangle : meshCube.triangles)
