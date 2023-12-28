@@ -3,7 +3,7 @@
 int main()
 {
     Engine3d engine3d;
-    sf::RenderWindow window(sf::VideoMode(800, 800), "Hi");
+    sf::RenderWindow window(sf::VideoMode(1000, 1000), "3D Test");
 
     while (window.isOpen())
     {
