@@ -75,6 +75,7 @@ std::vector<sf::ConvexShape> Engine3d::renderScreen(sf::Vector2u screenSize)
         drawObj.setFillColor(sf::Color::Transparent);
         drawObj.setOutlineColor(sf::Color::White);
         drawObj.setOutlineThickness(2.0f);
+        drawObj.setMiterLimit(1);
 
         // Project 3D -> 2D
         for (int i = 0; i < 3; i++)
