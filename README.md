@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/73f9f40c-fa68-420f-b637-7f3f151f3761)
+
 # CMake SFML Project Template
 
 This repository template should allow for a fast and hassle-free kick start of your next SFML project using CMake.
